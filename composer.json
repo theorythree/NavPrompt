@@ -1,0 +1,54 @@
+{
+    "name": "TheoryThree/NavPrompt",
+    "type": "library",
+    "description": "An easy-to-use navigation helper for your Laravel projects.",
+    "keywords": [
+        "TheoryThree",
+        "NavPrompt"
+    ],
+    "homepage": "https://github.com/TheoryThree/NavPrompt",
+    "license": "MIT",
+    "support": {
+      "issues": "https://github.com/theorythree/navprompt/issues",
+      "source": "https://github.com/theorythree/navprompt"
+    },
+    "authors": [
+        {
+            "name": "Dan Merfeld",
+            "email": "dan@theorythree.com",
+            "homepage": "https://www.theorythree.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.1",
+        "php" : "~5.6|~7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=5.4.3",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TheoryThree\\NavPrompt\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TheoryThree\\NavPrompt\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+          "providers": [
+            "TheoryThree\\NavPrompt\\NavPromptServiceProvider"
+          ],
+          "aliases": {
+            "Nav": "TheoryThree\\NavPrompt\\NavPromptFacade"
+          }
+        }
+    }
+}
