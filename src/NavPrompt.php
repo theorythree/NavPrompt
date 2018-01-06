@@ -2,7 +2,7 @@
 
 namespace TheoryThree\NavPrompt;
 
-class SkeletonClass
+class NavPrompt
 {
     /**
      * Create a new Skeleton Instance

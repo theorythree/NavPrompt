@@ -38,7 +38,7 @@ class NavPromptServiceProvider extends ServiceProvider
 
       // register app
       $this->app->bind('navprompt', function($app) {
-        return $this->app->make('TheoryThree\NavPrompt\SkeletonClass');
+        return $this->app->make('TheoryThree\NavPrompt\NavPrompt');
       });
 
     }
