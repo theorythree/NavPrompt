@@ -1,5 +1,5 @@
 {
-    "name": "TheoryThree/NavPrompt",
+    "name": "theorythree/navprompt",
     "type": "library",
     "description": "An easy-to-use navigation helper for your Laravel projects.",
     "keywords": [
@@ -20,6 +20,7 @@
             "role": "Developer"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "illuminate/support": "~5.1",
         "php" : "~5.6|~7.0"
