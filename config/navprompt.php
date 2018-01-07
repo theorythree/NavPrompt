@@ -2,7 +2,7 @@
 /**
  * Configuration file for the NavPrompt Laravel Plugin,
  * an easy-to-use utitility to automatically mark
- * navigation as active based on the current url
+ * navigation as active based on the current uri
  *
  * @license MIT
  * @package NavPrompt

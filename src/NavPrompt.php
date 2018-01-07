@@ -2,25 +2,55 @@
 
 namespace TheoryThree\NavPrompt;
 
+use Illuminate\Http\Request;
+
 class NavPrompt
 {
-    /**
-     * Create a new Skeleton Instance
-     */
-    public function __construct()
-    {
-        // constructor body
-    }
 
-    /**
-     * Friendly welcome
-     *
-     * @param string $phrase Phrase to return
-     *
-     * @return string Returns the phrase passed in
-     */
-    public function echoPhrase($phrase)
-    {
-        return $phrase;
-    }
+  /**
+  * The Request store.
+  *
+  * @var Illuminate\Http\Request
+  */
+
+  protected $request;
+
+  /**
+   * Construct a new NavPrompt instance
+   *
+   * @param Illuminate\Http\Request 		$request
+   */
+
+  public function __construct(Request $request) {
+    $this->request = $request;
+  }
+
+  /**
+ 	 * Checks named routes
+	 *
+	 * @param 	string				$route
+	 * @param 	string|NULL		$active
+	 * @return	string
+	 */
+
+	public function routeIsNamed($route, $active = NULL) {
+		$this->setActiveClass($active);
+		return ($this->request->routeIs($route) ? $this->active : '');
+	}
+
+  /**
+ 	 * Active Class setter
+	 *
+	 * @param 	string|NULL		$active
+	 * @return	$this
+	 */
+
+  private function setActiveClass($active) {
+    if ($active) {
+			return $this->active = $active;
+		} else {
+			return $this->active = config('navprompt.active_class');
+		}
+  }
+
 }
