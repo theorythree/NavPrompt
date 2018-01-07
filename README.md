@@ -76,10 +76,13 @@ This package uses the alias `Nav::` to access the plugin class in your project t
 
 ``` php
 // Route: Route::get('/about', 'AboutController@index')->name('about');
-// Current URL: http://www.mycompany.com/About
+// Current URL: http://www.mycompany.com/about
 
 <a href="/about" class="{{ Nav::routeIsNamed('about') }}">About Us</a>
 // returns 'is-active' string
+
+// result: 
+<a href="/about" class="is-active">About Us</a>
 
 ```
 
