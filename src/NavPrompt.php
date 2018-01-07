@@ -25,11 +25,18 @@ class NavPrompt
     $this->request = $request;
   }
 
-  public function routeContains($route, $active = NULL) {
-    $route = $this->trimURI($route); // removes starting and trailing slashes of provided URI
-    $pathParts = explode('/',$this->request->path());
-    return (in_array($route, $pathParts)) ? $this->active : '';
-  }
+  /**
+ 	 * Checks passed string against Laravel named routes
+	 *
+	 * @param 	string				$route
+	 * @param 	string|NULL		$active
+	 * @return	string
+	 */
+
+	public function routeIsNamed($route, $active = NULL) {
+		$this->setActiveClassName($active);
+		return ($this->request->routeIs($route)) ? $this->active : '';
+	}
 
   /**
  	 * Checks full URI Path
@@ -46,19 +53,25 @@ class NavPrompt
 	}
 
   /**
- 	 * Checks passed string against Laravel named routes
+ 	 * Checks a specific slug in the URI
 	 *
 	 * @param 	string				$route
-	 * @param 	string|NULL		$active
+   * @param 	Int|NULL		$position
+   * @param 	string|NULL		$active
 	 * @return	string
 	 */
 
-	public function routeIsNamed($route, $active = NULL) {
-		$this->setActiveClassName($active);
-  		return ($this->request->routeIs($route)) ? $this->active : '';
-	}
-
-
+  public function routeContains($route, $position=NULL, $active = NULL) {
+    $this->setActiveClassName($active);
+    $route = $this->trimURI($route); // removes starting and trailing slashes of provided URI
+    $pathParts = explode('/',$this->request->path());
+    if ($position && is_int($position)) {
+      $position--;
+      return ($pathParts[$position] == $route) ? $this->active : ''; // check specific segment
+    } else {
+      return (in_array($route, $pathParts)) ? $this->active : '';
+    }
+  }
 
   /**
  	 * Active Class setter

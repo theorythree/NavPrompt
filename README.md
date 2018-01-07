@@ -6,7 +6,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 ## Description
-> A simple solution for a simple problem. This package marks HTML elements with a CSS `is-active` class based on the current URI. Although this package was originally conceived to be used on navigation, it can be used in your templates anywhere you need to mark an HTML element with the `is-active` class.
+> A simple solution for a simple problem. This package marks HTML elements with a CSS `is-active` class based on the current URI. Although this package was originally conceived to be used on navigation, it can be used anywhere you need to mark elements with an active class name.
 
 ## How to Install
 
@@ -66,25 +66,116 @@ This package uses the alias `Nav::` to access the plugin class in your project t
 
 ---
 
-#### routeIsNamed()
+### routeIsNamed()
 
-`String routeIsNamed( String $route )`
-###### Description
+`String routeIsNamed( String $route, String $active=NULL )`
+
+#### Description
 > Accepts a string of the desired Laravel named route for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match).
 
-##### Example
+#### Parameters
+
+###### $route
+String: The Laravel route name to test against
+
+###### $active
+String | NULL (OPTIONAL): The name of the CSS class that should be returned if a URI match occurs
+
+#### Example
 
 ``` php
-// Route: Route::get('/about', 'AboutController@index')->name('about');
+// Route 1: Route::get('/about', 'AboutController@index')->name('about');
 // Current URL: http://www.mycompany.com/about
 
 <a href="/about" class="{{ Nav::routeIsNamed('about') }}">About Us</a>
 // returns 'is-active' string
 
-// result: 
+// result:
 <a href="/about" class="is-active">About Us</a>
 
 ```
+
+---
+
+### routeIs()
+
+`String routeIs( String $route, String $active=NULL )`
+
+#### Description
+> This method is designed to be used in cases when testing the full URI path is needed. For example, if you have several, similar links that you need to test.
+
+> Accepts a string of the full URI for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match). This method is designed to be used in cases where
+
+#### Parameters
+
+###### $route
+String: The full URI route to test against
+
+###### $active
+String | NULL (OPTIONAL): The name of the CSS class that should be returned if a URI match occurs
+
+#### Example
+
+``` php
+// Current URL: http://www.mycompany.com/about/team/dan-merfeld/
+
+<a href="/about/team/dan" class="{{ Nav::routeIs('/about/team/dan') }}">About Dan</a>
+// returns 'is-active' string
+
+// result:
+<a href="/about/team/dan" class="is-active">About Dan</a>
+
+```
+
+---
+
+### routeContains()
+
+`String routeContains( String $route, Int $position, String $active=NULL )`
+
+#### Description
+> This method is designed to be used in cases when you need to check for the existence of a specific URI slug.
+
+> Accepts a string of the URI slug, and an optional position, for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match). This method is designed to be used in cases where
+
+#### Parameters
+
+###### $route
+String: The URI slug to test against
+
+###### $position
+Int | NULL (OPTIONAL): The position of the URI slug in relation to the full URI.
+
+###### $active
+String | NULL (OPTIONAL): The name of the CSS class that should be returned if a URI match occurs
+
+#### Example
+
+Basic Example:
+``` php
+// Current URL: http://www.mycompany.com/about/team/dan/
+
+<a href="/about/team/dan" class="{{ Nav::routeContains('team') }}">About Dan</a>
+// returns 'is-active' string
+
+// result:
+<a href="/about/team/dan" class="is-active">About Dan</a>
+```
+Position Example:
+```
+// position 1 = "about"
+// position 2 = "team"
+// position 3 = "dan"
+
+<a href="/about/team/dan" class="{{ Nav::routeContains('team',1) }}">About Dan</a>
+// returns '' string
+
+// result:
+<a href="/about/team/dan" class="">About Dan</a>
+
+```
+
+---
 
 ## Change log
 
