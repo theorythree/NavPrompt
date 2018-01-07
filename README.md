@@ -72,7 +72,7 @@ This package uses the alias `Nav::` to access the plugin class in your project t
 ###### Description
 > Accepts a string of the desired Laravel named route for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match).
 
-##### Example:
+##### Example
 
 ``` php
 // Route: Route::get('/about', 'AboutController@index')->name('about');
