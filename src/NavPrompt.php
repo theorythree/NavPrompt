@@ -61,17 +61,19 @@ class NavPrompt
 	 * @return	string
 	 */
 
-  public function routeContains($route, $position=NULL, $active = NULL) {
-    $this->setActiveClassName($active);
-    $route = $this->trimURI($route); // removes starting and trailing slashes of provided URI
-    $pathParts = explode('/',$this->request->path());
-    if ($position && is_int($position)) {
-      $position--;
-      return ($pathParts[$position] == $route) ? $this->active : ''; // check specific segment
-    } else {
-      return (in_array($route, $pathParts)) ? $this->active : '';
-    }
-  }
+   public function routeContains($route, $position=NULL, $active = NULL) {
+     $this->setActiveClassName($active);
+     $route = $this->trimURI($route); // removes starting and trailing slashes of provided URI
+     $pathParts = explode('/',$this->request->path());
+     if ($position && is_int($position)) {
+       if ($position <= count($pathParts)) {
+         $position--;
+         return ($pathParts[$position] == $route) ? $this->active : ''; // check specific segment
+       }
+     } else {
+       return (in_array($route, $pathParts)) ? $this->active : '';
+     }
+   }
 
   /**
  	 * Active Class setter
