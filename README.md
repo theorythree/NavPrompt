@@ -10,13 +10,13 @@
 
 ## How to Install
 
-##### Step 1: Via Composer
+### Step 1: Via Composer
 
 ``` bash
 $ composer require theorythree/navprompt
 ```
 
-##### Step 2: Define the service provider and alias in your Laravel project
+### Step 2: Define the service provider and alias in your Laravel project
 
 This package takes advantage of the new _auto-discovery_ feature found in Laravel 5.5+. If you're using that version of Laravel, then you may skip this step.
 
@@ -43,7 +43,7 @@ Define the NavPrompt Alias to `config/app.php`.
 ];
 ```
 
-##### 3. Publish the plugin config file (Optional)
+### Step 3. Publish the plugin config file (Optional)
 
 Publish the configuration file to override the package defaults. The package is setup by default to work with [Bulma][link-bulma] - which uses an active class name of `is-active`, however if your project is using **Bootstrap**, you'll want to override the default active class name to `active`. To do this, publish the config file used by this plugin and set the override for the `active_class` value to `active`.
 
@@ -57,7 +57,7 @@ return [
 ];
 ```
 
-## Usage
+### Usage
 This package uses the alias `Nav::` to access the plugin class in your project template files. You can use any of the following methods to check your routes against:
 
 1. routeIsNamed()     // checks URI against Laravel named route
