@@ -4,19 +4,20 @@ All notable changes to `:package_name` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - YYYY-MM-DD
+## v1.1.0- 2018-01-09
 
 ### Added
-- Nothing
+- Fixed an issue that caused an out-of-bounds error when passing an invalid segment number
+- Changed how routeContains() works. It now accepts a single slug or an array of slugs. The optional _positions_ parameter also accepts a single value or an array of values.
 
-### Deprecated
-- Nothing
+## v1.0.0- 2018-01-07
 
-### Fixed
-- Nothing
+### Added
+- Fixed an issue that caused an out-of-bounds error when passing an invalid segment number
+- Added routeContains(), routeIs()
 
-### Removed
-- Nothing
+## v0.1.0- 2018-01-07
 
-### Security
-- Nothing
+### Added
+- Initial Codebase
+- Added routeIsNamed()
