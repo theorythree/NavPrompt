@@ -55,24 +55,23 @@ class NavPrompt
   /**
  	 * Checks a specific slug in the URI
 	 *
-	 * @param 	string				$route
-   * @param 	Int|NULL		$position
-   * @param 	string|NULL		$active
+	 * @param 	string|array		 $slugs
+   * @param 	int|array		     $position
+   * @param 	string|NULL		   $active
 	 * @return	string
 	 */
 
-   public function routeContains($route, $position=NULL, $active = NULL) {
-     $this->setActiveClassName($active);
-     $route = $this->trimURI($route); // removes starting and trailing slashes of provided URI
-     $pathParts = explode('/',$this->request->path());
-     if ($position && is_int($position)) {
-       if ($position <= count($pathParts)) {
-         $position--;
-         return ($pathParts[$position] == $route) ? $this->active : ''; // check specific segment
+   public function routeContains($slugs, $positions = 1, $active = NULL) {
+    $this->setActiveClassName($active);
+    $slugs = (is_array($slugs) ? $slugs : [$slugs]);
+    $positions = (is_array($positions) ? $positions : [$positions]);
+
+    foreach ($slugs as $slug) {
+       foreach ($positions as $position) {
+         if ($this->request->segment($position) == $slug) return $this->active;
        }
-     } else {
-       return (in_array($route, $pathParts)) ? $this->active : '';
      }
+   	 return '';
    }
 
   /**

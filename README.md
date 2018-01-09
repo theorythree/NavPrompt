@@ -131,20 +131,20 @@ String | NULL (OPTIONAL): The name of the CSS class that should be returned if a
 
 ### routeContains()
 
-`String routeContains( String $route, Int $position, String $active=NULL )`
+`String routeContains( String|Array $slugs, Int|Array $positions, String $active=NULL )`
 
 #### Description
-> This method is designed to be used in cases when you need to check for the existence of a specific URI slug.
+> This method is designed to be used in cases when you need to check for the existence of a specific URI slug within the full URI path.
 
-> Accepts a string of the URI slug, and an optional position, for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match). This method is designed to be used in cases where
+> Accepts a string (or array of strings) of the URI slug(s), and an optional position integer (or array of integers), for NavPrompt to check against and returns an empty string (no match) or a string containing the name of the active class (match). This method is designed to be used in cases where
 
 #### Parameters
 
-###### $route
-String: The URI slug to test against
+###### $slugs
+String|Array: The URI slug(s) to test against
 
-###### $position
-Int | NULL (OPTIONAL): The position of the URI slug in relation to the full URI.
+###### $positions
+Int | Array (OPTIONAL): The position(s) of the URI slug in relation to the full URI.
 
 ###### $active
 String | NULL (OPTIONAL): The name of the CSS class that should be returned if a URI match occurs
@@ -161,8 +161,11 @@ Basic Example:
 // result:
 <a href="/about/team/dan" class="is-active">About Dan</a>
 ```
-Position Example:
-```
+
+Basic Position Example:
+``` php
+// Current URL: http://www.mycompany.com/about/team/dan/
+
 // position 1 = "about"
 // position 2 = "team"
 // position 3 = "dan"
@@ -172,6 +175,28 @@ Position Example:
 
 // result:
 <a href="/about/team/dan" class="">About Dan</a>
+
+```
+
+Advanced Position Example:
+``` php
+// Current URL: http://www.mycompany.com/sports/contact/football/
+
+// position 1 = "sports"
+// position 2 = "contact"
+// position 3 = "football"
+
+<a href="/contact" class="{{ Nav::routeContains('contact',1) }}">Contact Us</a>
+// returns '' string
+// Result: <a href="/contact" class="">Contact Us</a>
+
+<a href="/sports/contact" class="{{ Nav::routeContains('sports',[1,2]) }}">List all Contact Sports</a>
+// returns 'is_active' string
+// Result: <a href="/sports/contact" class="is_active">List all Contact Sports</a>
+
+<a href="/contact/sports" class="{{ Nav::routeContains('sports',[1,2]) }}">List all Contact Sports</a>
+// returns 'is_active' string
+// Result: <a href="/contact/sports" class="is_active">List all Contact Sports</a>
 
 ```
 
