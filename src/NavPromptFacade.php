@@ -1,8 +1,6 @@
 <?php
 namespace TheoryThree\NavPrompt;
 /**
- * This file is part of EasyNav,
- * Easy navigation tools for Laravel.
  *
  * @license MIT
  * @package NavPrompt
